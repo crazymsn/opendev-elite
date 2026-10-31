@@ -1,0 +1,6 @@
+{
+  "version": "0.5.0",
+  "compose_schema_validation": "passed",
+  "build_policy": "build",
+  "docker_engine_execution": "not_run_no_engine"
+}

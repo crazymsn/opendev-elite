@@ -1,0 +1,30 @@
+[Unit]
+Description=Developer sponsorship local API
+After=network.target
+
+[Service]
+Type=simple
+User=sponsorship
+Group=sponsorship
+WorkingDirectory=/var/lib/github-sponsorship
+EnvironmentFile=/etc/github-sponsorship/worker.env
+ExecStart=/opt/github-sponsorship/.venv/bin/python -m worker.deployment process --root /var/lib/github-sponsorship --kind serve --instance systemd-api
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/github-sponsorship
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+LockPersonality=true
+StandardOutput=journal
+StandardError=journal
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=100
+
+[Install]
+WantedBy=multi-user.target

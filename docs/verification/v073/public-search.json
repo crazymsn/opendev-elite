@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-09-08T03:33:59.308154+00:00",
+  "authentication": {
+    "source": "github-cli",
+    "configured": true
+  },
+  "query": "repo:EnzymeAD/ReactantServer.jl is:public archived:false fork:true pushed:2020-01-01..2026-09-08 stars:>=0",
+  "total_count": 1,
+  "fetched": 1,
+  "status": "complete",
+  "details": {
+    "accepted_public_items": 1,
+    "filtered_visibility_items": 0,
+    "fork_mode": "include",
+    "incomplete_results": false,
+    "missing_pagination_link": false,
+    "next_page": false,
+    "page": 1,
+    "scope": "retrieved page; split jobs and queued pages must also finish",
+    "visibility": "public"
+  },
+  "public_projects_imported": 1,
+  "isolated_temporary_database": true,
+  "production_database_used": false,
+  "code_fetched": false,
+  "formal_assessments_written": false
+}

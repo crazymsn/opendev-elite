@@ -1,0 +1,26 @@
+{
+  "counts": {
+    "projects": 145,
+    "maintainers": 222,
+    "qualifications": 0,
+    "reviews": 0,
+    "experiences": 0,
+    "contacts": 0,
+    "interviews": 0,
+    "decisions": 0,
+    "grants": 0,
+    "followups": 0
+  },
+  "early_queues": {
+    "unassigned_projects": 145,
+    "awaiting_collection": 0,
+    "pending_selection": 0,
+    "pending_technical_reviews": 0
+  },
+  "summary_seconds": 0.3375,
+  "directory_total": 222,
+  "query_changes": 0,
+  "integrity": {
+    "integrity_check": "ok"
+  }
+}

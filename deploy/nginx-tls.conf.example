@@ -1,0 +1,33 @@
+# TEMPLATE ONLY. Replace every REPLACE_* value before nginx -t / installation.
+# Set service.local.json public_origin=https://REPLACE_HOST to this exact origin.
+# This file belongs in nginx's http context (e.g. sites-enabled).
+limit_req_zone $binary_remote_addr zone=sponsorship_login:10m rate=5r/m;
+server {
+    listen 443 ssl;
+    server_name REPLACE_HOST;
+    ssl_certificate /etc/ssl/REPLACE_CERTIFICATE.pem;
+    ssl_certificate_key /etc/ssl/private/REPLACE_PRIVATE_KEY.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    client_max_body_size 1m;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    location ~ ^/auth/(login|sso/login|password-login)$ {
+        limit_req zone=sponsorship_login burst=5 nodelay;
+        limit_req_status 429;
+        proxy_pass http://127.0.0.1:8765;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 60s;
+    }
+    location / {
+        proxy_pass http://127.0.0.1:8765;
+        proxy_http_version 1.1;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Forwarded-Proto https;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 60s;
+        proxy_send_timeout 60s;
+    }
+}

@@ -1,0 +1,118 @@
+async page => {
+  const checks=[], errors=[];
+  const check=(v,name)=>{if(!v)throw new Error(name);checks.push(name);};
+  page.on('pageerror',error=>errors.push(error.message));
+  const origin='http://127.0.0.1:8875/';
+  const password='synthetic browser password 12345';
+  const resetPassword='synthetic reset password 67890';
+  const finalPassword='synthetic personal phrase 98765';
+  const context=await page.context().browser().newContext();
+  const member=await context.newPage();
+  member.on('pageerror',error=>errors.push(error.message));
+  const login=async (target,name,secret)=>{
+    await target.locator('[data-auth-mode=login]').click();
+    await target.locator('#account-username').fill(name);
+    await target.locator('#account-password').fill(secret);
+    await target.locator('#account-submit').click();
+  };
+  const memberForm=()=>page.locator('.member-form').filter({hasText:'synthetic-member'});
+  try {
+    await page.goto(origin+'#team-login');
+    // A hash-only navigation may reuse the prior document after resetting fixtures.
+    await page.reload();
+    await page.locator('#admin-setup-tab').waitFor({state:'visible'});
+    check((await page.locator('#account-form-title').innerText())==='创建首位管理员','first local setup shown');
+    for(const width of [375,768,1024,1440]) {
+      await page.setViewportSize({width,height:1000});
+      check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'registration width '+width);
+    }
+    await page.locator('#team-login').screenshot({path:'output/playwright/v05-admin-register.png'});
+    await page.locator('#account-username').fill('synthetic-owner');
+    await page.locator('#account-display-name').fill('演示管理员');
+    await page.locator('#account-password').fill(password);
+    await page.locator('#account-confirm').fill('mismatched password phrase');
+    await page.locator('#account-submit').click();
+    check((await page.locator('#account-error').innerText()).includes('不一致'),'password confirmation validated');
+    await page.locator('#account-confirm').fill(password);
+    await page.locator('#account-submit').click();
+    await page.locator('.member-form').waitFor();
+    check((await page.locator('#identity-name').innerText())==='演示管理员','first administrator enters management');
+    check(!(await page.locator('#admin-setup-tab').isVisible()),'one-time setup closed');
+    await member.goto(origin+'#team-login');
+    await member.locator('[data-auth-mode=register]').click();
+    await member.locator('#account-username').fill('synthetic-member');
+    await member.locator('#account-display-name').fill('演示成员 <img src=x>');
+    await member.locator('#account-password').fill(password);
+    await member.locator('#account-confirm').fill(password);
+    await member.locator('#account-submit').click();
+    await member.locator('#account-notice').filter({hasText:'等待管理员审批'}).waitFor();
+    check(!(await member.locator('#workspace').isVisible()),'registration stays unauthenticated');
+    await login(member,'synthetic-member',password);
+    await member.locator('#account-error').filter({hasText:'尚未获得授权'}).waitFor();
+    check(true,'pending member cannot log in');
+    await page.locator('#refresh').click();
+    await memberForm().waitFor();
+    check(await memberForm().locator('img').count()===0,'member display names escaped');
+    await memberForm().locator('[name=role][value=reviewer]').check();
+    await memberForm().locator('[name=status]').selectOption('active');
+    await memberForm().locator('button[type=submit]').click();
+    await memberForm().locator('.badge').filter({hasText:'已授权'}).waitFor();
+    await login(member,'synthetic-member',password);
+    await member.locator('#workspace').waitFor({state:'visible'});
+    check(await member.locator('#navigation a[href="#members"]').count()===0,'reviewer has no admin navigation');
+    check(await member.evaluate(()=>localStorage.length===0&&sessionStorage.length===0),'password never in web storage');
+    await memberForm().locator('[name=role][value=reviewer]').uncheck();
+    await memberForm().locator('[name=role][value=auditor]').check();
+    await memberForm().locator('button[type=submit]').click();
+    await memberForm().locator('[name=role][value=auditor]').waitFor();
+    await member.locator('#refresh').click();
+    await member.locator('#login-view').waitFor({state:'visible'});
+    check(true,'role change invalidates logged-in session');
+    await memberForm().locator('.member-reset summary').click();
+    await memberForm().locator('[name=password]').fill(resetPassword);
+    await memberForm().locator('button[type=submit]').click();
+    await memberForm().waitFor();
+    await login(member,'synthetic-member',resetPassword);
+    await member.locator('#workspace').waitFor({state:'visible'});
+    check(true,'administrator password reset works');
+    await member.locator('a[href="#account"]').click();
+    await member.locator('#password-change-form').waitFor();
+    await member.locator('[name=current_password]').fill(resetPassword);
+    await member.locator('[name=new_password]').fill(finalPassword);
+    await member.locator('[name=confirm]').fill(finalPassword);
+    await member.locator('#password-change-form button').click();
+    await member.locator('#login-view').waitFor({state:'visible'});
+    await login(member,'synthetic-member',finalPassword);
+    await member.locator('#workspace').waitFor({state:'visible'});
+    check(true,'self-service password change and relogin');
+    for(const width of [375,768,1024,1440]) {
+      await page.setViewportSize({width,height:1000});
+      check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'member management width '+width);
+    }
+    await page.screenshot({path:'output/playwright/v05-member-management.png'});
+    await memberForm().locator('[name=status]').selectOption('disabled');
+    await memberForm().locator('button[type=submit]').click();
+    await memberForm().locator('.member-error').filter({hasText:'刷新后重试'}).waitFor();
+    check(true,'stale authorization cannot overwrite a newer password change');
+    await page.locator('#refresh').click();
+    await page.locator('#main[aria-busy="false"]').waitFor();
+    await memberForm().locator('[name=status]').selectOption('disabled');
+    await memberForm().locator('button[type=submit]').click();
+    await memberForm().locator('.badge').filter({hasText:'已停用'}).waitFor();
+    await member.locator('#refresh').click();
+    await member.locator('#login-view').waitFor({state:'visible'});
+    check(true,'disabled member loses session');
+    const owner=page.locator('.member-form').filter({hasText:'synthetic-owner'});
+    await owner.locator('[name=status]').selectOption('disabled');
+    await owner.locator('button[type=submit]').click();
+    await owner.locator('.member-error').filter({hasText:'至少一位'}).waitFor();
+    check(true,'last administrator cannot be disabled');
+    await page.locator('#logout').click();
+    await page.locator('#login-view').waitFor({state:'visible'});
+    check(await page.locator('#main').innerText()==='','logout clears private account data');
+    await page.setViewportSize({width:375,height:1000});
+    await page.locator('#team-login').screenshot({path:'output/playwright/v05-account-login-mobile.png'});
+    check(errors.length===0,'no uncaught JavaScript errors');
+    return {passed:checks.length,checks,errors,synthetic_only:true};
+  } finally { await context.close(); }
+}

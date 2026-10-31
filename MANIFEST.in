@@ -1,0 +1,20 @@
+include README.md main.py Makefile requirements.txt compose.yaml Dockerfile .dockerignore .env.example
+include config/discovery.json
+include config/*.example.json
+recursive-include examples *.json
+recursive-include scripts *.py *.ps1 *.js *.md *.cjs
+recursive-include deploy *.py *.service *.timer *.example *.json *.conf *.sh Dockerfile*
+recursive-include docs *.md
+recursive-include docs/verification/v060 *.json *.txt
+recursive-include docs/verification/v061 *.json *.txt
+recursive-include docs/verification/v070 *.json *.txt
+recursive-include docs/verification/v071 *.json *.txt
+recursive-include docs/verification/v072 *.json *.txt
+recursive-include docs/verification/v073 *.json *.txt
+recursive-include docs/verification/v074 *.json *.txt
+recursive-include docs/verification/v080 *.json *.txt *.png
+include .github/workflows/ci.yml
+global-exclude *.pyc *.pyo *.db *.db-wal *.db-shm *.token *.key *.local.json
+prune artifacts
+prune output
+prune .playwright-cli

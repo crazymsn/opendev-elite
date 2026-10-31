@@ -1,0 +1,14 @@
+{
+  "compose_parse": "passed",
+  "services": [
+    "init",
+    "api",
+    "worker",
+    "gateway",
+    "maintenance"
+  ],
+  "default_local_build": true,
+  "version": "0.6.0",
+  "docker_cli_available": false,
+  "container_runtime_test": "not_run"
+}

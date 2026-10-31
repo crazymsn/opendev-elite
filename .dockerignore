@@ -1,0 +1,25 @@
+# Allowlist: credentials, local databases, reports and artifacts never enter context.
+**
+!Dockerfile
+!Dockerfile.opendeploy
+!pyproject.toml
+!worker/
+!worker/**
+!src/
+!src/py/
+!src/py/**
+!github_email攻坚战 - 高质量开发者1444个.csv
+!github_email攻坚战 - 非高质量开发者8952个.csv
+!deploy/
+!deploy/healthcheck.py
+!deploy/backup.py
+!deploy/docker/
+!deploy/docker/**
+**/__pycache__/
+**/*.pyc
+**/*.db
+**/*.token
+**/*.key
+**/*.local.*
+**/.env
+**/secrets/

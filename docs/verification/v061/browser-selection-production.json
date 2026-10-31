@@ -1,0 +1,31 @@
+{
+  "facts": {
+    "version": "0.6.1",
+    "policy": "sop-2026-09-v2",
+    "demo": false,
+    "projects": 145,
+    "first_project": 1178786234,
+    "assessments": 0
+  },
+  "checks": [
+    "live version and policy upgraded",
+    "original candidates retained; no automatic assessments",
+    "zh-CN live exclusion rules available",
+    "zh-CN live criteria width 375",
+    "zh-CN live criteria width 768",
+    "zh-CN live criteria width 1024",
+    "zh-CN live criteria width 1440",
+    "zh-CN live new assessment evidence field",
+    "en live exclusion rules available",
+    "en live criteria width 375",
+    "en live criteria width 768",
+    "en live criteria width 1024",
+    "en live criteria width 1440",
+    "en live new assessment evidence field",
+    "no production business writes",
+    "no uncaught JavaScript errors"
+  ],
+  "errors": [],
+  "business_mutations": false,
+  "test_session_logged_out": true
+}

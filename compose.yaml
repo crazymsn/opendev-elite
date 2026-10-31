@@ -1,0 +1,117 @@
+name: opendev-elite
+
+x-app: &app
+  image: ${OPENDEV_IMAGE:-opendev-elite:0.8.0}
+  # Plain `docker compose up -d` builds local source, reusing cached layers.
+  pull_policy: build
+  build:
+    context: .
+    args:
+      PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.13-slim-bookworm}
+  user: "10001:10001"
+  init: true
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=64m,mode=1777"]
+  volumes:
+    - state:/var/lib/opendev-elite
+  environment: &environment
+    OPENDEV_PUBLIC_ORIGIN: ${OPENDEV_PUBLIC_ORIGIN:-http://127.0.0.1:${OPENDEV_PORT:-8780}}
+  logging: &logging
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+  pids_limit: 128
+  mem_limit: 512m
+  stop_grace_period: 60s
+
+services:
+  init:
+    <<: *app
+    command: [init]
+    restart: "no"
+    network_mode: none
+
+  api:
+    <<: *app
+    command: [api]
+    restart: unless-stopped
+    # SIGINT closes the Python HTTP server through its normal shutdown path.
+    stop_signal: SIGINT
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    environment:
+      <<: *environment
+      NEXT_CREDITS_PAT: ${NEXT_CREDITS_PAT:-}
+    # Port 8080 belongs to the gateway sharing this network namespace.
+    # The actual Python API remains private on 127.0.0.1:8765.
+    ports:
+      - "127.0.0.1:${OPENDEV_PORT:-8780}:8080"
+    healthcheck:
+      test: [CMD, python, -I, -m, worker.container, health-api]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  worker:
+    <<: *app
+    command: [worker]
+    restart: unless-stopped
+    stop_grace_period: 120s
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    environment:
+      <<: *environment
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+    healthcheck:
+      test: [CMD, python, -I, -m, worker.container, health]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  gateway:
+    image: ${OPENDEV_GATEWAY_IMAGE:-opendev-elite-gateway:0.8.0}
+    pull_policy: build
+    build:
+      context: .
+      dockerfile: deploy/docker/Dockerfile.gateway
+      args:
+        NGINX_IMAGE: ${NGINX_IMAGE:-nginx:stable-alpine}
+    network_mode: service:api
+    depends_on:
+      api:
+        condition: service_healthy
+        restart: true
+    environment: *environment
+    user: "101:101"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
+    restart: unless-stopped
+    stop_grace_period: 30s
+    pids_limit: 64
+    mem_limit: 128m
+    logging: *logging
+    healthcheck:
+      test: [CMD-SHELL, 'authority=$${OPENDEV_PUBLIC_ORIGIN#*://}; wget -q -O /dev/null --header "Host: $$authority" http://127.0.0.1:8080/healthz']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  maintenance:
+    <<: *app
+    profiles: [tools]
+    command: [health]
+    restart: "no"
+    network_mode: none
+
+volumes:
+  state:

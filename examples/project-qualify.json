@@ -1,0 +1,18 @@
+{
+  "project_id": 123,
+  "sha": "REPLACE_WITH_CURRENT_COMMIT_SHA",
+  "category": "agent-infra",
+  "scope_fit": "uncertain",
+  "maintenance": "uncertain",
+  "outcome": "hold",
+  "rationale": "REPLACE_WITH_REVIEWER_JUDGEMENT",
+  "evidence": {
+    "scope": "REPLACE_WITH_REAL_USERS_AND_AI_DEVELOPER_USE_CASE",
+    "maintenance": "REPLACE_WITH_COMMIT_RELEASE_OR_MAINTAINER_RESPONSE_EVIDENCE",
+    "sources": [
+      "REPLACE_WITH_VERIFIABLE_SOURCE"
+    ],
+    "reason_code": "evidence_missing",
+    "maintenance_kind": "unknown"
+  }
+}

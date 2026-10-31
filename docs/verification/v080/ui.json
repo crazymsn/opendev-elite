@@ -1,0 +1,64 @@
+{
+  "version": "0.8.0",
+  "policy_version": "sop-2026-09-v3",
+  "checked_at": "2026-09-08T08:29:31.213803+00:00",
+  "synthetic_workflow_only": true,
+  "workflow": {
+    "score_75_rejected": true,
+    "score_92_5_with_dimension_2_rejected": true,
+    "score_80_with_evidence_accepted": true,
+    "hold_without_scores_accepted": true,
+    "old_policy_and_forged_low_score_stale": true
+  },
+  "layout": {
+    "languages": [
+      "zh-CN",
+      "en"
+    ],
+    "workspace_widths": [
+      375,
+      768,
+      1024,
+      1440
+    ],
+    "workspace_pages": [
+      "overview",
+      "projects",
+      "criteria",
+      "selection"
+    ],
+    "login_widths": [
+      375,
+      768,
+      1440
+    ],
+    "document_horizontal_overflow": false,
+    "sticky_dialog_actions_desktop_mobile": true
+  },
+  "login": {
+    "invalid_password_rejected": true,
+    "default_admin_login_logout": true,
+    "password_visibility_toggle": true
+  },
+  "uncaught_page_errors": 0,
+  "expected_http_errors": [
+    401,
+    400
+  ],
+  "production_checks": "Default login, logout, read-only pages, v3 policy; no workflow mutations",
+  "runtime_hashes": {
+    "worker\\web\\accounts.js": "5edefbbad9a830b72804bb5e78e56cc09f3b48cc71740ac936e43d691d27d500",
+    "worker\\web\\app.css": "25e10018f58eda6d25d7accc2e539e1fc464edb82572eb6e1c07cff7943294b1",
+    "worker\\web\\app.js": "a5e31d0696d5bad4d95013c87f86cf8b8987bb8768308451a53fca500e3de9cb",
+    "worker\\web\\developers.js": "f2449b3548d59abb2e38f054587b5fe9460ad0d99982d77718d9f8237a04e4d7",
+    "worker\\web\\elite.css": "5f3b0e7b682d0e2b7adfeebde982e6393247faf3fea4cd7071c5432a8a3d1029",
+    "worker\\web\\forms.js": "8b72a31f26a78960c613bf553cc9ad44651cebe6441ad1ff33498ff0f9e7a8dd",
+    "worker\\web\\i18n.en.js": "08410fe36aed755b26f0b998a2ef9de4e6c58f3a0cf862e626e37f388b40c1d3",
+    "worker\\web\\i18n.js": "724cb640773336862c72d1fdc0c1d444d18f91fc6284d795411a602566213813",
+    "worker\\web\\index.html": "818925064a80f35840034f09cd2ed51148a00c0c423a81ead0e0c2c25385dd98",
+    "worker\\web\\landing.css": "6fca392a8695432910326f954c1cda3a4d7785c9f44d9bc570eea0a0aecfd095",
+    "worker\\web\\landing.js": "93f75a72711b291bcf2414f055e8de7b3e4b3f7a32cf7a57c9a8096a74257fbb",
+    "worker\\web\\views.js": "0e1d7ee2b5a705ed7e9c968979469b65c8dbab9645e1a6639b2d44a0af49ab39",
+    "worker\\web\\workspace.css": "b0b3f68ea5d96ac9effd1e27f9f216281ff57b5eedf9abb9cf9b6350600cd4f6"
+  }
+}

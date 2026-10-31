@@ -1,0 +1,16 @@
+{
+  "application": {
+    "title": "OpenDev Elite API",
+    "version": "0.5.0"
+  },
+  "health": {
+    "ok": true
+  },
+  "schema_version": 5,
+  "upgrade_backup_schema": 4,
+  "backup_integrity": "ok",
+  "production_account_count": 0,
+  "administrator_setup_ready": true,
+  "synthetic_accounts_in_production": false,
+  "deployment_mode": "Windows Python service"
+}

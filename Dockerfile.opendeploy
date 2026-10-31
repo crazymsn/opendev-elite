@@ -1,0 +1,27 @@
+# OpenDeploy single-service image. Docker Compose remains the local multi-service deployment.
+ARG PYTHON_IMAGE=python:3.13-slim-bookworm
+FROM ${PYTHON_IMAGE} AS builder
+WORKDIR /build
+COPY pyproject.toml ./
+COPY worker ./worker
+COPY src/py ./src/py
+RUN python -m pip wheel --no-cache-dir --wheel-dir /wheels '.[oidc]'
+
+FROM ${PYTHON_IMAGE} AS runtime
+LABEL org.opencontainers.image.title="OpenDev Elite" \
+      org.opencontainers.image.description="GitHub discovery and developer sponsorship workspace"
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 \
+    OPENDEV_DATA_ROOT=/var/lib/opendev-elite HOME=/home/opendev \
+    PORT=8080 OPENDEV_TRUST_PROXY=1
+RUN groupadd --gid 10001 opendev \
+    && useradd --uid 10001 --gid 10001 --create-home --shell /usr/sbin/nologin opendev \
+    && install -d -m 0700 -o 10001 -g 10001 /var/lib/opendev-elite
+COPY --from=builder /wheels /wheels
+RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels 'github-sponsorship-worker[oidc]' \
+    && rm -rf /wheels
+COPY ["github_email攻坚战 - 高质量开发者1444个.csv", "github_email攻坚战 - 非高质量开发者8952个.csv", "/opt/opendev/contacts/"]
+WORKDIR /opt/opendev
+USER 10001:10001
+EXPOSE 8080
+CMD ["sh", "-c", "test -n \"$OPENDEV_PUBLIC_ORIGIN\" || { echo 'OPENDEV_PUBLIC_ORIGIN is required' >&2; exit 78; }; python -I -u -m worker.container init >/tmp/opendev-init.json && python -I -u -c \"import glob, os; from worker.db import Store; from worker.contact_points import bootstrap_files; s=Store(os.path.join(os.environ['OPENDEV_DATA_ROOT'],'worker.db')); bootstrap_files(s, glob.glob('/opt/opendev/contacts/*.csv')); s.close()\" && exec python -I -u -m worker.container combined"]
+

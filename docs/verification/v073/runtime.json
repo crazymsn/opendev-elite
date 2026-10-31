@@ -1,0 +1,14 @@
+[
+  {
+    "role": "serve",
+    "owned_processes": 2,
+    "final_runtime": true,
+    "authentication_configured": true
+  },
+  {
+    "role": "run",
+    "owned_processes": 2,
+    "final_runtime": true,
+    "authentication_configured": true
+  }
+]

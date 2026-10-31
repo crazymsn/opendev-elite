@@ -1,0 +1,26 @@
+{
+  "version": "0.7.0",
+  "schema": 6,
+  "backup_name": "before-v070-20260908T022750Z",
+  "original_projects_preserved": true,
+  "account_rows_unchanged": true,
+  "business_assessments_unchanged": true,
+  "database_integrity": "ok",
+  "runtime_files_matching_source_wheel_install": 47,
+  "counts_after_start": {
+    "projects": 145,
+    "maintainers": 222,
+    "qualifications": 0,
+    "reviews": 0,
+    "experiences": 0,
+    "contacts": 0,
+    "interviews": 0,
+    "decisions": 0,
+    "grants": 0,
+    "followups": 0,
+    "accounts": 1
+  },
+  "health": {
+    "ok": true
+  }
+}

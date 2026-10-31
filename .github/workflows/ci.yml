@@ -1,0 +1,43 @@
+name: Worker verification
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11', '3.13']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install --upgrade pip setuptools wheel
+      - run: python -m pip install ".[oidc]"
+      - run: python -m unittest discover -s tests -v
+      - run: python -m pip wheel . --no-deps --wheel-dir dist
+      - run: python -m venv .wheel-smoke
+      - if: runner.os == 'Windows'
+        run: .wheel-smoke/Scripts/python -m pip install --no-index --find-links dist github-sponsorship-worker; .wheel-smoke/Scripts/sponsorship-worker --help
+      - if: runner.os != 'Windows'
+        run: .wheel-smoke/bin/python -m pip install --no-index --find-links dist github-sponsorship-worker && .wheel-smoke/bin/sponsorship-worker --help
+      - run: python scripts/validation/live-crawler-smoke.py --db ${{ runner.temp }}/live-smoke.db --repo octocat/Hello-World
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: worker-${{ matrix.os }}-${{ matrix.python }}
+          path: dist/*.whl
+  compose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: docker compose version
+      - run: python scripts/validation/compose-smoke.py

@@ -1,0 +1,15 @@
+{
+  "compose_schema_validation": "passed",
+  "schema_source": "https://raw.githubusercontent.com/compose-spec/compose-spec/main/schema/compose-spec.json",
+  "services": [
+    "init",
+    "api",
+    "worker",
+    "gateway",
+    "maintenance"
+  ],
+  "structural_checks": "passed",
+  "default_start_command": "docker compose up -d",
+  "automatic_local_build_policy": "passed",
+  "docker_engine_execution": "not_run_no_engine"
+}

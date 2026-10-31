@@ -1,0 +1,199 @@
+{
+  "public_github_reads": true,
+  "repository_code_executed": false,
+  "business_assessments_written": false,
+  "snapshots": [
+    {
+      "repo": "EnzymeAD/ReactantServer.jl",
+      "sha": "37c947b36a81384e70242d4784d40ab77a84fdcc",
+      "complete": true,
+      "sampling": {
+        "candidate_counts": {
+          "ci_configuration": 5,
+          "dependency_manifest": 17,
+          "implementation": 96,
+          "test": 46
+        },
+        "files": [
+          {
+            "blob_sha": "d438ead6d8a309906df57f39a2bf5e5292aff7c6",
+            "path": "packages/ReactantServer/src/server.jl",
+            "role": "implementation",
+            "size": 17970
+          },
+          {
+            "blob_sha": "892010382f1d40cd5699f5d10b008a6bac7243fa",
+            "path": "packages/ReactantServerGateway/src/server.jl",
+            "role": "implementation",
+            "size": 20118
+          },
+          {
+            "blob_sha": "4e127f1befff611d33ada61088b47a6968dc465b",
+            "path": "packages/ReactantServerNode/src/main.jl",
+            "role": "implementation",
+            "size": 12823
+          },
+          {
+            "blob_sha": "f46b4569941b748f07c1448730e0ddd92b0c75ef",
+            "path": "packages/ReactantServer/test/test_bert_text.jl",
+            "role": "test",
+            "size": 7220
+          },
+          {
+            "blob_sha": "7d9b352f7063a9fefdd0b934199de0c67e46892c",
+            "path": "Project.toml",
+            "role": "dependency_manifest",
+            "size": 1279
+          },
+          {
+            "blob_sha": "8b0b744a8458a7daf5f034a61e35d805e65c610e",
+            "path": ".github/workflows/_test.yml",
+            "role": "ci_configuration",
+            "size": 1779
+          }
+        ],
+        "max_file_bytes": 80000,
+        "max_files": 6,
+        "omitted_counts": {
+          "empty": 0,
+          "generated_or_vendor": 7,
+          "invalid": 0,
+          "oversized": 1,
+          "unsupported": 73
+        },
+        "strategy": "repository-evidence-v2",
+        "tree_truncated": false,
+        "warning": "Deterministic path-based samples; reviewers must inspect the actual core workflow and expand evidence where needed. Presence is not test success, code quality, maintenance or product value."
+      },
+      "fetched_at": "2026-09-08T02:43:37.176816+00:00"
+    },
+    {
+      "repo": "SuperMarioYL/templ8c",
+      "sha": "dff5fd76fa72da0cb553e0227e53df5fa2820dc1",
+      "complete": true,
+      "sampling": {
+        "candidate_counts": {
+          "ci_configuration": 3,
+          "dependency_manifest": 1,
+          "implementation": 9,
+          "test": 1
+        },
+        "files": [
+          {
+            "blob_sha": "637d58f053f243a102b077d524478b5e1e62569d",
+            "path": "src/templ8c/cli.py",
+            "role": "implementation",
+            "size": 2954
+          },
+          {
+            "blob_sha": "a7a39dd4da5115f483ec5cbbd2f440bee4a00fbb",
+            "path": "src/templ8c/reference/specs.py",
+            "role": "implementation",
+            "size": 9659
+          },
+          {
+            "blob_sha": "301943ba900dd236e820cea7be8d85fc5ed0ec14",
+            "path": "src/templ8c/checker.py",
+            "role": "implementation",
+            "size": 2792
+          },
+          {
+            "blob_sha": "97743a3b78433a5adcf02f9d8fbdef5927835658",
+            "path": "tests/test_checker.py",
+            "role": "test",
+            "size": 6607
+          },
+          {
+            "blob_sha": "44df6c53873a6dcb667e8ac1b2d589db06dc6c82",
+            "path": "pyproject.toml",
+            "role": "dependency_manifest",
+            "size": 1374
+          },
+          {
+            "blob_sha": "60334ed9e0cf71ef746ed959887157f1cd935b92",
+            "path": ".github/workflows/ci.yml",
+            "role": "ci_configuration",
+            "size": 398
+          }
+        ],
+        "max_file_bytes": 80000,
+        "max_files": 6,
+        "omitted_counts": {
+          "empty": 0,
+          "generated_or_vendor": 0,
+          "invalid": 0,
+          "oversized": 1,
+          "unsupported": 10
+        },
+        "strategy": "repository-evidence-v2",
+        "tree_truncated": false,
+        "warning": "Deterministic path-based samples; reviewers must inspect the actual core workflow and expand evidence where needed. Presence is not test success, code quality, maintenance or product value."
+      },
+      "fetched_at": "2026-09-08T02:44:08.772901+00:00"
+    },
+    {
+      "repo": "DCBIA-OrthoLab/VISOR-serve",
+      "sha": "6341f64b4ba72f4a607f3443bb9c555f3aece7e6",
+      "complete": true,
+      "sampling": {
+        "candidate_counts": {
+          "ci_configuration": 1,
+          "dependency_manifest": 6,
+          "implementation": 53,
+          "test": 30
+        },
+        "files": [
+          {
+            "blob_sha": "7148c9986fb850ceefb261ef739cfccc4e97a329",
+            "path": "server/main.py",
+            "role": "implementation",
+            "size": 51272
+          },
+          {
+            "blob_sha": "ae06d151a9b8f213f7eeca8030860f879c0a85dd",
+            "path": "server/execution/dispatch.py",
+            "role": "implementation",
+            "size": 20991
+          },
+          {
+            "blob_sha": "f4f6b488950f7df32b2cf9c4dba87e331fc11de3",
+            "path": "server/registry/conventions.py",
+            "role": "implementation",
+            "size": 2647
+          },
+          {
+            "blob_sha": "9c98cccbacaae142e92217b366b69b34caa931e1",
+            "path": "server/tests/test_data_integration.py",
+            "role": "test",
+            "size": 3608
+          },
+          {
+            "blob_sha": "fd81013939d9bc0e9bbd128f7bba26b3abc150af",
+            "path": "server/requirements.txt",
+            "role": "dependency_manifest",
+            "size": 3180
+          },
+          {
+            "blob_sha": "56cc9c9f12698110bfb0ef803771017832607ca5",
+            "path": ".github/workflows/tests.yml",
+            "role": "ci_configuration",
+            "size": 6538
+          }
+        ],
+        "max_file_bytes": 80000,
+        "max_files": 6,
+        "omitted_counts": {
+          "empty": 9,
+          "generated_or_vendor": 0,
+          "invalid": 0,
+          "oversized": 4,
+          "unsupported": 76
+        },
+        "strategy": "repository-evidence-v2",
+        "tree_truncated": false,
+        "warning": "Deterministic path-based samples; reviewers must inspect the actual core workflow and expand evidence where needed. Presence is not test success, code quality, maintenance or product value."
+      },
+      "fetched_at": "2026-09-08T02:44:44.430478+00:00"
+    }
+  ]
+}

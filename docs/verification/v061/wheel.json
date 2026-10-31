@@ -1,0 +1,23 @@
+{
+  "version": "0.6.1",
+  "loaded_from": "runtime/venv-v061/Lib/site-packages/worker/__init__.py",
+  "isolated_import": true,
+  "paths_verified": [
+    "/",
+    "/assets/app.js",
+    "/assets/forms.js",
+    "/assets/accounts.js",
+    "/assets/app.css",
+    "/assets/landing.js",
+    "/assets/landing.css",
+    "/assets/i18n.js",
+    "/assets/i18n.en.js",
+    "/assets/views.js",
+    "/assets/workspace.css",
+    "/auth/options",
+    "/openapi.json",
+    "/api/inbox"
+  ],
+  "synthetic_only": true,
+  "redaction_note": "Host path prefix omitted."
+}

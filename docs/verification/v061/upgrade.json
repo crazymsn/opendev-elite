@@ -1,0 +1,21 @@
+{
+  "version": "0.6.1",
+  "policy_version": "sop-2026-09-v2",
+  "schema": 6,
+  "backup": "before-v061-20260907T130926Z",
+  "database_integrity": "ok",
+  "original_accounts_preserved": true,
+  "original_project_ids_preserved": 145,
+  "business_records_after": {
+    "qualifications": 0,
+    "reviews": 0,
+    "experiences": 0,
+    "contacts": 0,
+    "interviews": 0,
+    "decisions": 0,
+    "grants": 0,
+    "followups": 0
+  },
+  "wheel_source_installed_identical_files": 45,
+  "no_automatic_project_decisions": true
+}

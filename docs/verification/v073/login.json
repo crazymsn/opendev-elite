@@ -1,0 +1,11 @@
+{
+  "version": "0.7.3",
+  "health": {
+    "ok": true
+  },
+  "default_admin_login": true,
+  "registration_closed": true,
+  "accounts_total": 1,
+  "test_session_logged_out": true,
+  "business_mutations": false
+}

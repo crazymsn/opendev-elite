@@ -1,0 +1,14 @@
+{
+  "lookback_days": 7,
+  "fork_mode": "include",
+  "queries": [
+    {"category": "agent-infra", "query": "topic:ai-agents"},
+    {"category": "agent-infra", "query": "topic:mcp"},
+    {"category": "ai-coding", "query": "topic:ai-coding"},
+    {"category": "ai-coding", "query": "\"coding agent\" in:name,description,readme"},
+    {"category": "rag", "query": "topic:rag"},
+    {"category": "routing-inference", "query": "\"llm router\" in:name,description,readme"},
+    {"category": "routing-inference", "query": "topic:inference-server"},
+    {"category": "applications", "query": "topic:llm-app"}
+  ]
+}

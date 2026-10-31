@@ -1,0 +1,18 @@
+{
+  "version": "0.8.0",
+  "checked_at": "2026-09-08T08:26:44.7232042Z",
+  "roles": [
+    {
+      "role": "serve",
+      "verified_process_count": 2,
+      "expected_environment": "venv-v080",
+      "synthetic_demo": false
+    },
+    {
+      "role": "run",
+      "verified_process_count": 2,
+      "expected_environment": "venv-v080",
+      "synthetic_demo": false
+    }
+  ]
+}

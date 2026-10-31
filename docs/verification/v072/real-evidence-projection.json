@@ -1,0 +1,157 @@
+{
+  "network_requests": 0,
+  "database_writes": 0,
+  "repository_code_executed": false,
+  "projects": [
+    {
+      "repo": "EnzymeAD/ReactantServer.jl",
+      "sha": "37c947b36a81384e70242d4784d40ab77a84fdcc",
+      "files": [
+        {
+          "path": "packages/ReactantServer/src/server.jl",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": true
+        },
+        {
+          "path": "packages/ReactantServerGateway/src/server.jl",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": true
+        },
+        {
+          "path": "packages/ReactantServerNode/src/main.jl",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": true
+        },
+        {
+          "path": "packages/ReactantServer/test/test_bert_text.jl",
+          "role": "test",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "Project.toml",
+          "role": "dependency_manifest",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": ".github/workflows/_test.yml",
+          "role": "ci_configuration",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        }
+      ],
+      "commits_captured": 88,
+      "commits_displayed": 20
+    },
+    {
+      "repo": "DCBIA-OrthoLab/VISOR-serve",
+      "sha": "6341f64b4ba72f4a607f3443bb9c555f3aece7e6",
+      "files": [
+        {
+          "path": "server/main.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": true
+        },
+        {
+          "path": "server/execution/dispatch.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": true
+        },
+        {
+          "path": "server/registry/conventions.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "server/tests/test_data_integration.py",
+          "role": "test",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "server/requirements.txt",
+          "role": "dependency_manifest",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": ".github/workflows/tests.yml",
+          "role": "ci_configuration",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        }
+      ],
+      "commits_captured": 100,
+      "commits_displayed": 20
+    },
+    {
+      "repo": "SuperMarioYL/templ8c",
+      "sha": "dff5fd76fa72da0cb553e0227e53df5fa2820dc1",
+      "files": [
+        {
+          "path": "src/templ8c/cli.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "src/templ8c/reference/specs.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "src/templ8c/checker.py",
+          "role": "implementation",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "tests/test_checker.py",
+          "role": "test",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": "pyproject.toml",
+          "role": "dependency_manifest",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        },
+        {
+          "path": ".github/workflows/ci.yml",
+          "role": "ci_configuration",
+          "preview_status": "available",
+          "blob_verified": true,
+          "preview_truncated": false
+        }
+      ],
+      "commits_captured": 3,
+      "commits_displayed": 3
+    }
+  ]
+}

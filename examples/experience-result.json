@@ -1,0 +1,13 @@
+{
+  "id": "REPLACE_WITH_EXPERIENCE_ID",
+  "sha": "REPLACE_WITH_CAPTURED_COMMIT",
+  "result": {
+    "success": false,
+    "executor": "REPLACE: human name or Agent version",
+    "environment": "REPLACE: actual tested environment",
+    "steps": ["REPLACE: actual performed steps"],
+    "actual_result": "REPLACE: actual observed outcome",
+    "artifacts": ["REPLACE: durable log/screenshot/output path"],
+    "failure_kind": "environment"
+  }
+}

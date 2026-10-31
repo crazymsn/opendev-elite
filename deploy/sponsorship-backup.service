@@ -1,0 +1,14 @@
+[Unit]
+Description=Developer sponsorship SQLite online backup
+
+[Service]
+Type=oneshot
+User=sponsorship
+Group=sponsorship
+ExecStart=/opt/github-sponsorship/.venv/bin/python /opt/github-sponsorship/deploy/backup.py --root /var/lib/github-sponsorship
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/github-sponsorship

@@ -1,0 +1,38 @@
+{
+  "version": "0.7.3",
+  "runtime_files_matching_source_wheel_install": 50,
+  "schema": 6,
+  "backup_name": "before-v073-20260908T031858Z",
+  "original_projects": 247,
+  "original_projects_preserved": true,
+  "account_rows_unchanged": true,
+  "business_assessments_unchanged": true,
+  "database_integrity": "ok",
+  "foreign_keys": "ok",
+  "all_stored_project_and_snapshot_metadata_public": true,
+  "counts_after_start": {
+    "projects": 247,
+    "maintainers": 239,
+    "snapshots": 92,
+    "accounts": 1,
+    "qualifications": 0,
+    "reviews": 0,
+    "experiences": 0,
+    "contacts": 0,
+    "interviews": 0,
+    "decisions": 0,
+    "grants": 0,
+    "followups": 0
+  },
+  "snapshots_in_backup": 89,
+  "snapshots_after_final_restart": 2,
+  "authenticated_response": {
+    "date": "Tue, 08 Sep 2026 03:33:28 GMT",
+    "x-ratelimit-limit": "5000",
+    "x-ratelimit-remaining": "4956"
+  },
+  "health": {
+    "ok": true
+  },
+  "checked_at": "2026-09-08T03:33:28.538515+00:00"
+}

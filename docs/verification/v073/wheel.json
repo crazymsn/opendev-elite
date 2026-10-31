@@ -1,0 +1,27 @@
+{
+  "version": "0.7.3",
+  "isolated_import": true,
+  "paths_verified": [
+    "/",
+    "/assets/app.js",
+    "/assets/forms.js",
+    "/assets/accounts.js",
+    "/assets/app.css",
+    "/assets/landing.js",
+    "/assets/landing.css",
+    "/assets/i18n.js",
+    "/assets/i18n.en.js",
+    "/assets/views.js",
+    "/assets/developers.js",
+    "/assets/workspace.css",
+    "/auth/options",
+    "/openapi.json",
+    "/api/inbox",
+    "/api/developers",
+    "/api/developers/201",
+    "/api/inbox?kind=pending_selection",
+    "/api/projects/101"
+  ],
+  "synthetic_only": true,
+  "cwd_outside_source": true
+}

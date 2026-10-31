@@ -1,0 +1,594 @@
+{
+  "version": "sop-2026-09-v3",
+  "scope_paths": [
+    {
+      "id": "developer",
+      "title": {
+        "zh-CN": "面向开发者",
+        "en": "For developers"
+      },
+      "body": {
+        "zh-CN": "AI 编程、调试、评测、数据处理、RAG、模型路由与推理等；说明具体开发任务和产出。",
+        "en": "AI coding, debugging, evaluation, data work, RAG, routing and inference; identify the developer task and output."
+      }
+    },
+    {
+      "id": "user",
+      "title": {
+        "zh-CN": "面向真实用户",
+        "en": "For end users"
+      },
+      "body": {
+        "zh-CN": "帮助用户完成研究、创作、办公、学习或业务任务的 AI 工具；有清楚的输入、结果和使用边界。",
+        "en": "AI tools for research, creation, work, learning or business tasks, with clear inputs, outputs and limits."
+      }
+    },
+    {
+      "id": "infrastructure",
+      "title": {
+        "zh-CN": "支撑 Agent 运行",
+        "en": "Agent infrastructure"
+      },
+      "body": {
+        "zh-CN": "运行时、编排、记忆、工具调用、观测、评测、身份及隔离等；有具体下游工作流。",
+        "en": "Runtimes, orchestration, memory, tools, observability, evaluation, identity and isolation tied to downstream workflows."
+      }
+    },
+    {
+      "id": "agent-application",
+      "title": {
+        "zh-CN": "供 Agent 实际调用",
+        "en": "Applications used by Agents"
+      },
+      "body": {
+        "zh-CN": "通过 API、CLI、SDK 或协议提供可执行能力；检查机器可读输入输出、错误语义、权限与调用成本。",
+        "en": "Executable capabilities exposed through APIs, CLIs, SDKs or protocols; assess machine-readable I/O, errors, permissions and cost."
+      }
+    }
+  ],
+  "prerequisites": [
+    {
+      "id": "real-use",
+      "title": {
+        "zh-CN": "明确的人、任务与结果",
+        "en": "A specific user, task and outcome"
+      },
+      "body": {
+        "zh-CN": "写清谁在什么场景下遇到什么问题、现有做法哪里不足、工具如何产生可核对结果。个人自用也有效；不强求付费用户或规模。",
+        "en": "Identify who faces which problem, the limits of current practice, and a checkable outcome. Personal use counts; revenue or scale is not required."
+      }
+    },
+    {
+      "id": "ai-fit",
+      "title": {
+        "zh-CN": "AI 能力与场景适配",
+        "en": "Meaningful AI or Agent relevance"
+      },
+      "body": {
+        "zh-CN": "核心工作流确实服务 AI 使用、开发或 Agent；名称含 AI、添加聊天框或追热点本身不构成依据。",
+        "en": "The core workflow must serve AI use, AI development or Agents. An AI name, chat box or trend alone is not evidence."
+      }
+    },
+    {
+      "id": "working-path",
+      "title": {
+        "zh-CN": "存在可核对的核心路径",
+        "en": "An inspectable core path"
+      },
+      "body": {
+        "zh-CN": "提供核心实现、可用版本、安装入口或调用示例及预期输出。早期原型可入选；仅承诺未来能力先暂缓。此步检查入口，实际成功由后续体验验证。",
+        "en": "Provide core implementation, an available version, setup or invocation and expected output. Early prototypes qualify; roadmap-only capabilities are held. This checks an entry point, not a completed product trial."
+      }
+    },
+    {
+      "id": "maintenance",
+      "title": {
+        "zh-CN": "有意义的持续维护",
+        "en": "Meaningful ongoing maintenance"
+      },
+      "body": {
+        "zh-CN": "采用有日期和来源的功能/修复提交、实质发布或维护者对具体问题的响应。仅更新时间、机器人依赖更新、格式改动、刷提交或空发布不能单独证明维护。",
+        "en": "Use dated, sourced feature/fix commits, substantive releases or maintainer responses to specific issues. Timestamps, bot dependency bumps, formatting, artificial commits or empty releases alone are insufficient."
+      }
+    },
+    {
+      "id": "reviewable",
+      "title": {
+        "zh-CN": "可评测、可追溯且无已确认排除项",
+        "en": "Evaluable, attributable and no confirmed exclusion"
+      },
+      "body": {
+        "zh-CN": "核对代码/服务入口、作者关系、许可及第三方依赖、数据与凭证处理、执行权限和成本边界。可在可接受条件下评测；关键事实不清先暂缓，不把公开仓库自动当作可任意使用。",
+        "en": "Check code/service access, authorship, licensing and dependencies, data/credential handling, permissions and costs. Evaluation must be feasible on acceptable terms. Hold unresolved facts; a public repository does not imply unrestricted use."
+      }
+    },
+    {
+      "id": "quality-threshold",
+      "title": {
+        "zh-CN": "达到质量评审门槛",
+        "en": "Meet the quality review threshold"
+      },
+      "body": {
+        "zh-CN": "五维加权总分至少 80/100，每项至少 3/4，附判断依据与来源，并满足双日期维护证据。服务端重新计算；分数不替代两轮实际审核。",
+        "en": "Weighted total at least 80/100, each dimension at least 3/4, with rationale, sources and two dated maintenance events. The server recomputes the total; scores do not replace either review round."
+      }
+    }
+  ],
+  "maintenance_guidance": [
+    {
+      "id": "signals",
+      "title": {
+        "zh-CN": "看变化内容，不数绿色格子",
+        "en": "Inspect substance, not activity counts"
+      },
+      "body": {
+        "zh-CN": "优先记录具体变更解决了什么问题、谁回应、何时回应及来源。提交数、最近推送和 Stars 仅用于发现线索。",
+        "en": "Record the problem a change resolves, who responded, when, and the source. Commit counts, last push and Stars are discovery signals only."
+      }
+    },
+    {
+      "id": "window",
+      "title": {
+        "zh-CN": "90 天观察，必要时回看一年",
+        "en": "Observe 90 days; extend to a year when useful"
+      },
+      "body": {
+        "zh-CN": "优先看近 90 天，成熟稳定项目可回看一年。进入优质评测池须在一年内有至少两个不同日期的实质提交、发布或维护响应及对应来源；超过窗口先暂缓核查，不自动认定弃用。",
+        "en": "Prefer the last 90 days; extend to one year for stable projects. Quality selection needs two distinct dates with substantive changes, releases or responses and sources within that year. Older evidence prompts a hold, not an abandonment claim."
+      }
+    },
+    {
+      "id": "stable",
+      "title": {
+        "zh-CN": "成熟稳定与早期密集开发分别判断",
+        "en": "Judge stable and early projects in context"
+      },
+      "body": {
+        "zh-CN": "成熟项目可由实质修复、兼容性发布或具体维护响应证明维护；新项目看已交付的最小闭环与后续动作，不因历史短或单人维护而淘汰。",
+        "en": "Stable projects may show maintenance through fixes, compatibility releases or specific responses. For new projects assess a delivered minimal loop and follow-through; short history or solo maintenance is not disqualifying."
+      }
+    },
+    {
+      "id": "unknown",
+      "title": {
+        "zh-CN": "信息不足先暂缓",
+        "en": "Hold uncertainty"
+      },
+      "body": {
+        "zh-CN": "公开响应不足、休假或节奏变化先记录待核查事项；不得为补证据绕过两轮筛选联系作者。明确归档、弃用声明或长期不可用且无修复依据，才支持停止维护结论。",
+        "en": "Record unanswered questions, breaks or cadence changes as uncertainty. Do not bypass both reviews to contact an author. Explicit archival/discontinuation or persistent unavailability without recovery evidence can support an inactive finding."
+      }
+    }
+  ],
+  "hold_reasons": [
+    {
+      "id": "evidence_missing",
+      "title": {
+        "zh-CN": "关键资料不足",
+        "en": "Missing essential evidence"
+      },
+      "body": {
+        "zh-CN": "真实场景、源码、来源或判断依据不足；列出要补的具体材料。",
+        "en": "Use case, implementation, source or rationale is incomplete; specify the missing material."
+      }
+    },
+    {
+      "id": "maintenance_uncertain",
+      "title": {
+        "zh-CN": "维护情况待确认",
+        "en": "Maintenance uncertain"
+      },
+      "body": {
+        "zh-CN": "只有更新时间、机械提交，或无法判断项目是否仍受支持。",
+        "en": "Only timestamps or mechanical activity are visible, or support status is unclear."
+      }
+    },
+    {
+      "id": "not_ready",
+      "title": {
+        "zh-CN": "核心能力尚待交付",
+        "en": "Core capability not available yet"
+      },
+      "body": {
+        "zh-CN": "只有路线图、等待开放测试或核心流程未形成；写明重新评估触发条件。",
+        "en": "Only a roadmap, closed access or no core loop yet; record a trigger for reassessment."
+      }
+    },
+    {
+      "id": "evaluation_blocked",
+      "title": {
+        "zh-CN": "评测条件暂不具备",
+        "en": "Evaluation temporarily blocked"
+      },
+      "body": {
+        "zh-CN": "缺少匹配硬件、测试账号、预算或环境；环境失败不等同于产品无效。",
+        "en": "Required hardware, test access, budget or environment is unavailable. Environment failure does not prove product failure."
+      }
+    },
+    {
+      "id": "rights_uncertain",
+      "title": {
+        "zh-CN": "归属或使用权限待核对",
+        "en": "Authorship or usage rights uncertain"
+      },
+      "body": {
+        "zh-CN": "许可证缺失、依赖条款不清、作者关系或可评测权限待确认。",
+        "en": "Missing/unclear licensing, dependency terms, authorship or evaluation rights need clarification."
+      }
+    },
+    {
+      "id": "risk_unresolved",
+      "title": {
+        "zh-CN": "重要风险需要验证",
+        "en": "Material risks need verification"
+      },
+      "body": {
+        "zh-CN": "高权限操作、数据外发、成本或结果可靠性缺少说明；先验证，不能凭猜测指控。",
+        "en": "Privileged actions, outbound data, cost or reliability are unexplained; verify rather than make unsupported accusations."
+      }
+    },
+    {
+      "id": "quality_below_threshold",
+      "title": {
+        "zh-CN": "质量未达评测池门槛",
+        "en": "Below the quality threshold"
+      },
+      "body": {
+        "zh-CN": "总分不足 80，或任何一项低于 3 分，记录差距与改进后可重评条件。",
+        "en": "Total below 80 or any dimension below 3; record gaps and reassessment conditions."
+      }
+    },
+    {
+      "id": "maintenance_single_event",
+      "title": {
+        "zh-CN": "只有单次维护依据",
+        "en": "Only one maintenance event"
+      },
+      "body": {
+        "zh-CN": "仅一次初始化、发布或响应，无法支持维护连续性；等待后续实质交付再重评。",
+        "en": "One initial commit, release or response does not establish continuity; reassess after substantive follow-up."
+      }
+    }
+  ],
+  "exclusion_reasons": [
+    {
+      "id": "outside_scope",
+      "title": {
+        "zh-CN": "与目标场景无关",
+        "en": "Outside the intended scope"
+      },
+      "body": {
+        "zh-CN": "核心能力不服务真实 AI/Agent 使用或开发，且不能说明可信的相关场景。",
+        "en": "Core capabilities do not serve AI/Agent use or development and no credible relevant use case is identified."
+      }
+    },
+    {
+      "id": "content_only",
+      "title": {
+        "zh-CN": "只有内容，没有工具能力",
+        "en": "Content without a usable tool capability"
+      },
+      "body": {
+        "zh-CN": "仅链接汇总、教程搬运、论文目录、静态提示词或宣传页面，没有可执行产品/工具路径。资料中附带可复用工具时应单独评估工具。",
+        "en": "Only link lists, copied tutorials, paper indexes, static prompts or promotion, without an executable product/tool path. Assess any reusable tool separately."
+      }
+    },
+    {
+      "id": "abandoned",
+      "title": {
+        "zh-CN": "已确认停止维护",
+        "en": "Confirmed discontinued maintenance"
+      },
+      "body": {
+        "zh-CN": "维护者明确弃用、仓库归档且无接续版本，或核心能力长期不可用且有停止支持的依据。低频更新本身不满足本条。",
+        "en": "Explicit discontinuation, archival without a successor, or sustained core failure with evidence of withdrawn support. Low update frequency alone does not qualify."
+      }
+    },
+    {
+      "id": "duplicate_no_contribution",
+      "title": {
+        "zh-CN": "搬运且无可核对新增贡献",
+        "en": "Copy without verifiable added contribution"
+      },
+      "body": {
+        "zh-CN": "经对比确认只是镜像、改名、套壳或复制宣传，没有实质工程/场景贡献。Fork、模型 API 封装和成熟方案组合本身不排除。",
+        "en": "Comparison confirms a mirror, rebrand or copied promotion with no substantive engineering or use-case contribution. Forks, API wrappers and integration of existing tools are not automatically excluded."
+      }
+    },
+    {
+      "id": "no_real_value",
+      "title": {
+        "zh-CN": "实际验证后不成立",
+        "en": "Value disproved by actual evaluation"
+      },
+      "body": {
+        "zh-CN": "在匹配环境和合理复测后，核心任务无法完成，或相对现有方案没有可说明的收益。必须记录样本、对照和局限，不能只凭主观印象。",
+        "en": "In a suitable environment and reasonable retest, the core task fails or provides no explainable benefit over alternatives. Record samples, comparison and limits rather than impressions."
+      }
+    },
+    {
+      "id": "proven_misconduct",
+      "title": {
+        "zh-CN": "已证实的严重不诚信或恶意行为",
+        "en": "Substantiated serious deception or malicious behavior"
+      },
+      "body": {
+        "zh-CN": "有可复核证据证明冒用身份、伪造关键产品证据、窃取凭证或以欺骗/未经授权操作为核心用途。争议、传闻或一条告警不足以定性。",
+        "en": "Verifiable evidence establishes impersonation, fabricated material product evidence, credential theft or a core purpose of deception/unauthorized actions. Rumors or a single alert are insufficient."
+      }
+    },
+    {
+      "id": "rights_blocked",
+      "title": {
+        "zh-CN": "已确认无法开展评测或支持",
+        "en": "Confirmed inability to evaluate or support"
+      },
+      "body": {
+        "zh-CN": "有明确来源证明相关代码、服务或依赖无可用的评测/使用权限且无法解决。缺少许可证或商业条款本身先暂缓核对。",
+        "en": "Evidence establishes that necessary evaluation/usage rights for code, service or dependencies are unavailable and cannot be resolved. Missing licensing or commercial terms alone first require clarification."
+      }
+    },
+    {
+      "id": "unmitigated_risk",
+      "title": {
+        "zh-CN": "严重风险无法接受或缓解",
+        "en": "Severe risk cannot be acceptably mitigated"
+      },
+      "body": {
+        "zh-CN": "实际核查发现不可接受的数据泄露、破坏性执行、权限或费用风险，且当前无法隔离、约束或修复；保留复现及版本依据。",
+        "en": "Evaluation identifies unacceptable leakage, destructive execution, permission or cost risks that cannot currently be isolated, bounded or fixed. Retain reproduction and version evidence."
+      }
+    }
+  ],
+  "priorities": [
+    {
+      "id": "impact",
+      "title": {
+        "zh-CN": "可衡量的用户收益",
+        "en": "Measurable user benefit"
+      },
+      "body": {
+        "zh-CN": "真实任务完成率、时间、质量、可访问性或成本改善；小众高价值问题同样值得关注。",
+        "en": "Task success, time, quality, accessibility or cost improvement; valuable niche problems count."
+      }
+    },
+    {
+      "id": "contribution",
+      "title": {
+        "zh-CN": "可说明的差异与工程贡献",
+        "en": "Explainable differentiation and contribution"
+      },
+      "body": {
+        "zh-CN": "比对具体替代方案，关注集成深度、稳定性、部署体验或新的工作流，而非只要求自研模型。",
+        "en": "Compare concrete alternatives; integration depth, reliability, deployment or workflow improvements count without a proprietary model."
+      }
+    },
+    {
+      "id": "sustainability",
+      "title": {
+        "zh-CN": "持续交付与开放协作",
+        "en": "Sustained delivery and collaboration"
+      },
+      "body": {
+        "zh-CN": "对问题负责、反馈进入迭代、边界透明；不强求庞大团队、固定发布频率或全英文文档。",
+        "en": "Ownership of issues, feedback-driven iterations and transparent limits; no large team, fixed release schedule or English-only documentation is required."
+      }
+    },
+    {
+      "id": "funding-impact",
+      "title": {
+        "zh-CN": "赞助能解除明确瓶颈",
+        "en": "Sponsorship removes a concrete bottleneck"
+      },
+      "body": {
+        "zh-CN": "访谈后说明 Credits 用于何种开发/评测、为何适合、如何衡量里程碑及后续成本；不靠强制宣传或采集隐私换取支持。",
+        "en": "After interview, explain how Credits support development/evaluation, fit the need, and map to milestones and ongoing cost; no forced promotion or private-data collection in exchange."
+      }
+    }
+  ],
+  "evidence_rules": [
+    {
+      "zh-CN": "每条判断记录责任人、当前版本、观察日期、来源、事实与推断的区别。外部链接与截图不等于已复现。",
+      "en": "Record the responsible reviewer, current version, observation date, source, and facts versus inference. A link or screenshot does not establish reproduction."
+    },
+    {
+      "zh-CN": "入选只表示可以投入评测；技术通过、产品通过与赞助决定分别留痕。优先级不能抵消排除条件。",
+      "en": "Selection only authorizes evaluation effort. Technical, product and funding decisions remain separate. Priority never cancels an exclusion."
+    },
+    {
+      "zh-CN": "排除须有对应条款和证据，记录纠正后可重评的条件；资料不足使用暂缓，禁止把未知写成不合格。",
+      "en": "Exclusion needs a matching reason and evidence, with conditions for reassessment. Hold missing information; do not equate unknown with failed."
+    },
+    {
+      "zh-CN": "不以 Stars、国籍、地域、融资、团队人数、商业模式、项目新旧或是否封装现有模型单独决定。",
+      "en": "Stars, nationality, geography, funding, team size, business model, project age or wrapping an existing model never decide eligibility alone."
+    }
+  ],
+  "maintenance_kinds": [
+    {
+      "id": "unknown",
+      "zh-CN": "尚未核实",
+      "en": "Not verified"
+    },
+    {
+      "id": "commit",
+      "zh-CN": "实质代码或修复提交",
+      "en": "Substantive code or fix commit"
+    },
+    {
+      "id": "release",
+      "zh-CN": "有内容的版本发布",
+      "en": "Substantive release"
+    },
+    {
+      "id": "response",
+      "zh-CN": "维护者针对具体问题的响应",
+      "en": "Maintainer response to a specific issue"
+    },
+    {
+      "id": "mixed",
+      "zh-CN": "多种有效维护证据",
+      "en": "Multiple meaningful signals"
+    },
+    {
+      "id": "timestamp_only",
+      "zh-CN": "仅时间戳或机械活动",
+      "en": "Only timestamps or mechanical activity"
+    }
+  ],
+  "assessment_fields": [
+    {
+      "name": "use_case",
+      "label": {
+        "zh-CN": "用户、任务与预期收益",
+        "en": "User, task and expected benefit"
+      },
+      "help": {
+        "zh-CN": "谁在什么场景下使用，输入/输出是什么，现有做法哪里不足；尚未体验时标明这是待验证假设。",
+        "en": "Who uses it, in which scenario, with which input/output and benefit over current practice. Mark untested expectations as hypotheses."
+      },
+      "include_required": true
+    },
+    {
+      "name": "delivery",
+      "label": {
+        "zh-CN": "核心能力与评测入口",
+        "en": "Core capability and evaluation entry"
+      },
+      "help": {
+        "zh-CN": "引用核心实现、安装/API/CLI 入口、示例及限制；不要把路线图当作已交付。",
+        "en": "Cite core implementation, setup/API/CLI entry, examples and limits. Do not treat a roadmap as shipped capability."
+      },
+      "include_required": true
+    },
+    {
+      "name": "access_risk",
+      "label": {
+        "zh-CN": "归属、使用权限与风险核查",
+        "en": "Authorship, usage rights and risk review"
+      },
+      "help": {
+        "zh-CN": "记录作者/源码归属、许可与依赖、数据/凭证、权限、成本的已知边界和排除项核查结果；未知先暂缓。",
+        "en": "Record authorship, licensing/dependencies, data/credentials, permissions, costs and exclusion checks. Hold unresolved facts."
+      },
+      "include_required": true
+    },
+    {
+      "name": "differentiation",
+      "label": {
+        "zh-CN": "替代方案与新增贡献",
+        "en": "Alternatives and contribution"
+      },
+      "help": {
+        "zh-CN": "写出具名替代方案、具体改善、来源和局限。",
+        "en": "Name an alternative, concrete improvement, sources and limitations."
+      },
+      "include_required": true
+    },
+    {
+      "name": "evaluation_plan",
+      "label": {
+        "zh-CN": "可复现评测方案",
+        "en": "Reproducible evaluation plan"
+      },
+      "help": {
+        "zh-CN": "固定版本、输入输出、正常/失败用例、预算与权限；Agent 产品写明调用契约。",
+        "en": "Version, inputs/outputs, success/failure cases, budget and permissions; specify the Agent invocation contract."
+      },
+      "include_required": true
+    }
+  ],
+  "quality_rubric": {
+    "threshold": 80,
+    "dimension_floor": 3,
+    "dimensions": [
+      {
+        "id": "problem",
+        "weight": 20,
+        "evidence_field": "use_case",
+        "title": {
+          "zh-CN": "真实需求与任务价值",
+          "en": "Problem and task value"
+        },
+        "body": {
+          "zh-CN": "3 分：明确用户、重复发生的任务与现有方案痛点，有具体使用或需求来源。4 分：多个独立使用场景或可量化收益证据；不要求付费用户。",
+          "en": "3: A specific user, recurring task and baseline pain with usage or demand evidence. 4: Multiple independent cases or measured benefit; paying users are not required."
+        }
+      },
+      {
+        "id": "engineering",
+        "weight": 25,
+        "evidence_field": "delivery",
+        "title": {
+          "zh-CN": "工程成熟度",
+          "en": "Engineering maturity"
+        },
+        "body": {
+          "zh-CN": "3 分：核心实现完整、模块职责清楚，关键路径有测试或可复核验证，包含失败处理。4 分：再有负例、回归与可靠性证据；仅存在 tests 目录不计为验证。",
+          "en": "3: Implemented core, clear boundaries, critical-path tests or inspectable checks, and failure handling. 4: Negative cases, regressions and reliability evidence; a tests folder alone is insufficient."
+        }
+      },
+      {
+        "id": "maintenance",
+        "weight": 20,
+        "evidence_field": "maintenance",
+        "title": {
+          "zh-CN": "维护连续性与响应",
+          "en": "Sustained maintenance"
+        },
+        "body": {
+          "zh-CN": "3 分：一年内至少两个不同日期的实质维护事实、两个对应来源，说明改动内容或问题解决过程。4 分：持续交付并有用户反馈进入迭代；单次初始化和机器人更新不够。",
+          "en": "3: At least two dated substantive maintenance events with two sources within a year, explaining changes or resolutions. 4: Sustained delivery incorporating user feedback; one initial commit or bot updates is insufficient."
+        }
+      },
+      {
+        "id": "differentiation",
+        "weight": 20,
+        "evidence_field": "differentiation",
+        "title": {
+          "zh-CN": "差异化与新增贡献",
+          "en": "Differentiation and contribution"
+        },
+        "body": {
+          "zh-CN": "3 分：至少一个具名替代方案，指出可核对的新增能力、工作流改善及限制。4 分：多个对照或复用案例支持明显优势；泛称更快、更智能不够。",
+          "en": "3: At least one named alternative and verifiable added capability or workflow benefit, with limitations. 4: Multiple comparisons or reuse cases support a material advantage; vague claims are insufficient."
+        }
+      },
+      {
+        "id": "evaluability",
+        "weight": 15,
+        "evidence_field": "evaluation_plan",
+        "title": {
+          "zh-CN": "可评测性与使用边界",
+          "en": "Evaluability and usage boundaries"
+        },
+        "body": {
+          "zh-CN": "3 分：有固定版本安装/调用步骤、输入与预期输出、失败用例、成本/权限边界。Agent 产品须有机器可读契约和错误语义。4 分：有可复现基准与结果校验；这不代表团队已实际体验。",
+          "en": "3: Versioned setup/invocation, inputs and expected outputs, failure cases, and cost/permission limits. Agent tools need machine-readable contracts and errors. 4: Reproducible benchmarks and result checks; this is not completed team experience."
+        }
+      }
+    ],
+    "scale": [
+      {
+        "zh-CN": "0 · 无可核查依据",
+        "en": "0 · No verifiable evidence"
+      },
+      {
+        "zh-CN": "1 · 仅有声明或零散材料",
+        "en": "1 · Claims or fragments"
+      },
+      {
+        "zh-CN": "2 · 基本可用，关键证据仍不足",
+        "en": "2 · Basic capability, important gaps"
+      },
+      {
+        "zh-CN": "3 · 证据充分，达到质量要求",
+        "en": "3 · Substantiated quality"
+      },
+      {
+        "zh-CN": "4 · 有更强的验证与明确优势",
+        "en": "4 · Strong validation and advantage"
+      }
+    ]
+  }
+}

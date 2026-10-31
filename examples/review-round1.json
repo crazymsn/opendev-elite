@@ -1,0 +1,12 @@
+{
+  "project_id": 123,
+  "round": 1,
+  "sha": "REPLACE_WITH_CAPTURED_COMMIT",
+  "decision": "pass",
+  "rationale": "REPLACE: explain engineering quality and ongoing maintenance",
+  "evidence": {
+    "structure": ["REPLACE: pinned source file and reviewer findings"],
+    "maintenance": ["REPLACE: substantive change and issue response evidence"],
+    "documentation": ["REPLACE: installation, example, license and limitations"]
+  }
+}

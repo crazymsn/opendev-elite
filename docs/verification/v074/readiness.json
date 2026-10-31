@@ -1,0 +1,230 @@
+{
+  "installed_version": "0.7.4",
+  "read_only_connection": true,
+  "github_environment_describes_audit_process": true,
+  "report": {
+    "schema_version": 1,
+    "generated_at": "2026-09-08T03:43:45.049709+00:00",
+    "status": "blocked",
+    "local_configuration_ready": false,
+    "production_verified": false,
+    "external_evidence_recorded": false,
+    "checks": [
+      {
+        "id": "service_identities",
+        "layer": "configuration",
+        "status": "pass",
+        "summary": "Five separate operational identities from enabled tokens and active human accounts; no login or real-person verification performed.",
+        "evidence": {
+          "identity_configuration_valid": true,
+          "known_placeholder_absent": true,
+          "browser_configuration_valid": true,
+          "oidc_configured": false,
+          "oidc_discovery_or_login_checked": false,
+          "separate_operational_roles": true,
+          "enabled_identity_count": 7,
+          "enabled_token_identity_count": 6,
+          "enabled_account_identity_count": 1,
+          "account_actor_conflicts": 0,
+          "account_configuration_valid": true,
+          "token_entropy_or_compromise_checked": false,
+          "password_login_or_strength_checked": false
+        }
+      },
+      {
+        "id": "credits_configuration",
+        "layer": "configuration",
+        "status": "missing_or_invalid",
+        "summary": "Static settings only; external credentials, endpoints and executor availability are not verified.",
+        "evidence": {
+          "configured": false,
+          "base_url_valid": false,
+          "event_slug_valid": false,
+          "expiry_valid": false,
+          "event_evidence_present": false,
+          "pat_configured": false,
+          "pat_format_valid": false,
+          "configuration_ready": false,
+          "connectivity_checked": false,
+          "writes_enabled": false
+        }
+      },
+      {
+        "id": "agent_configuration",
+        "layer": "configuration",
+        "status": "missing_or_invalid",
+        "summary": "Static settings only; external credentials, endpoints and executor availability are not verified.",
+        "evidence": {
+          "configured": false,
+          "configuration_ready": false,
+          "docker_command_available": false,
+          "daemon_checked": false,
+          "image_checked": false
+        }
+      },
+      {
+        "id": "database_integrity",
+        "layer": "local_data",
+        "status": "pass",
+        "summary": "Read-only SQLite integrity, foreign keys and supported schema.",
+        "evidence": {
+          "integrity_ok": true,
+          "foreign_keys_ok": true,
+          "schema_version": 6,
+          "schema_supported": true
+        }
+      },
+      {
+        "id": "collection_queue",
+        "layer": "local_data",
+        "status": "pass",
+        "summary": "Dead jobs or expired leases require inspection; a healthy queue does not establish collection completeness.",
+        "evidence": {
+          "queued": 349,
+          "running": 1,
+          "done": 166,
+          "dead": 0,
+          "ready": 349,
+          "delayed": 0,
+          "expired_leases": 0
+        }
+      },
+      {
+        "id": "synthetic_data_absent",
+        "layer": "local_data",
+        "status": "pass",
+        "summary": "Explicit synthetic/test markers must be absent from the production evidence database; absence is not proof of truth.",
+        "evidence": {
+          "count": 0,
+          "records": [],
+          "scan_is_heuristic": true
+        }
+      },
+      {
+        "id": "github_collection_evidence",
+        "layer": "external_evidence",
+        "status": "recorded_unverified",
+        "summary": "Current complete snapshots carry matching repository/SHA/API-source provenance.",
+        "evidence": {
+          "count": 107,
+          "ids": [
+            45,
+            46,
+            24,
+            30,
+            7,
+            8,
+            2,
+            15,
+            38,
+            87,
+            20,
+            56,
+            95,
+            19,
+            108,
+            13,
+            62,
+            32,
+            12,
+            93
+          ],
+          "externally_verified": false
+        }
+      },
+      {
+        "id": "human_experience_evidence",
+        "layer": "external_evidence",
+        "status": "missing",
+        "summary": "Successful human experiences with declared steps and artifacts are recorded.",
+        "evidence": {
+          "count": 0,
+          "ids": [],
+          "externally_verified": false
+        }
+      },
+      {
+        "id": "agent_experience_evidence",
+        "layer": "external_evidence",
+        "status": "missing",
+        "summary": "Successful Agent experiences are tied to completed authenticated leases and stored artifacts; file contents require independent review.",
+        "evidence": {
+          "count": 0,
+          "ids": [],
+          "externally_verified": false
+        }
+      },
+      {
+        "id": "two_round_review_evidence",
+        "layer": "external_evidence",
+        "status": "missing",
+        "summary": "Current two-round passes refer to qualifying recorded experience IDs.",
+        "evidence": {
+          "count": 0,
+          "ids": [],
+          "externally_verified": false
+        }
+      },
+      {
+        "id": "credits_issuance_evidence",
+        "layer": "external_evidence",
+        "status": "missing",
+        "summary": "Activated participant receipts match terms/provider identifiers and a separate reconciliation actor.",
+        "evidence": {
+          "count": 0,
+          "ids": [],
+          "externally_verified": false
+        }
+      }
+    ],
+    "warnings": [
+      "This offline audit makes no network calls and never certifies execution, source integrity, credential validity or Credits issuance.",
+      "Database evidence can be forged by a trusted local database owner; review artifacts and provider audit records independently.",
+      "HTTP regression tests and demo fixtures establish software behavior only; they are not real-product or real-funding acceptance.",
+      "Docker output-volume quota, reviewed image contents, TLS, backups and operational ownership require deployment verification."
+    ],
+    "doctor": {
+      "generated_at": "2026-09-08T03:43:44.478115+00:00",
+      "healthy": true,
+      "database": {
+        "integrity_ok": true,
+        "foreign_keys_ok": true,
+        "schema_version": 6,
+        "schema_supported": true
+      },
+      "queue": {
+        "queued": 349,
+        "running": 1,
+        "done": 166,
+        "dead": 0,
+        "ready": 349,
+        "delayed": 0,
+        "expired_leases": 0
+      },
+      "github": {
+        "token_configured": false,
+        "connectivity_checked": false
+      },
+      "credits": {
+        "configured": false,
+        "base_url_valid": false,
+        "event_slug_valid": false,
+        "expiry_valid": false,
+        "event_evidence_present": false,
+        "pat_configured": false,
+        "pat_format_valid": false,
+        "configuration_ready": false,
+        "connectivity_checked": false,
+        "writes_enabled": false
+      },
+      "agent": {
+        "configured": false,
+        "configuration_ready": false,
+        "docker_command_available": false,
+        "daemon_checked": false,
+        "image_checked": false
+      },
+      "external_notifications_enabled": false
+    }
+  }
+}

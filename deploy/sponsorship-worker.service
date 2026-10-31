@@ -1,0 +1,31 @@
+[Unit]
+Description=Developer sponsorship discovery and evidence worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=sponsorship
+Group=sponsorship
+WorkingDirectory=/var/lib/github-sponsorship
+EnvironmentFile=/etc/github-sponsorship/worker.env
+ExecStart=/opt/github-sponsorship/.venv/bin/sponsorship-worker --db /var/lib/github-sponsorship/worker.db run --config /var/lib/github-sponsorship/discovery.local.json --interval 300 --max-jobs 20 --out /var/lib/github-sponsorship/reports
+Restart=on-failure
+RestartSec=30
+TimeoutStopSec=60
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/github-sponsorship
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+LockPersonality=true
+StandardOutput=journal
+StandardError=journal
+LogRateLimitIntervalSec=30s
+LogRateLimitBurst=100
+
+[Install]
+WantedBy=multi-user.target

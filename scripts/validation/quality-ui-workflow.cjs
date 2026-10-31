@@ -1,0 +1,62 @@
+async page => {
+  if(!page.url().startsWith('http://127.0.0.1:8886/'))throw Error('Synthetic fixture on 8886 required');
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.reload();
+  await page.locator('.quality-result-head').waitFor();
+  if(!(await page.locator('.quality-result-head').innerText()).includes('100'))throw Error('100-point fixture missing');
+  await page.goto('http://127.0.0.1:8886/#projects/802/selection');
+  await page.locator('.quality-result-head').waitFor();
+  if(!(await page.locator('.quality-result-head').innerText()).includes('75'))throw Error('75-point score missing');
+  if(!(await page.locator('#main').innerText()).includes('评估需更新'))throw Error('Low score not invalidated');
+  await page.goto('http://127.0.0.1:8886/#projects/803/selection');
+  await page.getByRole('button',{name:'更新入选评估',exact:true}).waitFor();
+  if(!(await page.locator('#main').innerText()).includes('评估需更新'))throw Error('Old policy not invalidated');
+  await page.goto('http://127.0.0.1:8886/#projects/801/selection');
+  await page.getByRole('button',{name:'更新入选评估',exact:true}).click();
+  await page.locator('.quality-editor').last().waitFor();
+  if(await page.locator('.quality-editor').count()!==5)throw Error('Missing dimension groups');
+  const form=page.locator('#action-form');
+  const field=name=>form.locator(`[name="${name}"]`);
+  await field('scope_fit').selectOption('yes');
+  await field('maintenance').selectOption('active');
+  await field('outcome').selectOption('include');
+  await field('evidence.maintenance_kind').selectOption('mixed');
+  const today=new Date().toISOString().slice(0,10), older=new Date(Date.now()-30*86400000).toISOString().slice(0,10);
+  await field('evidence.maintenance_date').fill(today);
+  await field('evidence.maintenance_dates').fill(`${older}\n${today}`);
+  for(const name of ['rationale','evidence.scope','evidence.use_case','evidence.delivery','evidence.access_risk','evidence.differentiation','evidence.evaluation_plan','evidence.maintenance'])await field(name).fill('SYNTHETIC UI acceptance fixture. Inspectable evidence only; no real project assessment.');
+  await field('evidence.sources').fill('fixture:quality-ui/source');
+  for(const id of ['problem','engineering','maintenance','differentiation','evaluability']) {
+    await field(`evidence.quality.${id}.score`).selectOption('3');
+    await field(`evidence.quality.${id}.sources`).fill(`fixture:${id}/first\nfixture:${id}/second`);
+  }
+  if(!(await page.locator('#quality-live').innerText()).includes('75/100'))throw Error('Live score calculation wrong');
+  const save=async status=>{
+    const response=page.waitForResponse(r=>r.url().endsWith('/api/actions/qualify')&&r.request().method()==='POST');
+    await page.locator('#dialog-submit').click();
+    const r=await response;if(r.status()!==status)throw Error(`Expected ${status}: ${r.status()} ${await r.text()}`);
+  };
+  await save(400);
+  if(!(await page.locator('#dialog-error').innerText()).includes('80/100'))throw Error('Missing clear threshold error');
+  for(const id of ['problem','engineering','maintenance','differentiation'])await field(`evidence.quality.${id}.score`).selectOption('4');
+  await field('evidence.quality.evaluability.score').selectOption('2');
+  await save(400);
+  for(const id of ['engineering','maintenance','differentiation','evaluability'])await field(`evidence.quality.${id}.score`).selectOption('3');
+  await page.locator('#quality-live').scrollIntoViewIfNeeded();
+  await page.screenshot({path:'output/playwright/v080-quality-form-desktop.png'});
+  await page.setViewportSize({width:375,height:812});
+  await page.screenshot({path:'output/playwright/v080-quality-form-mobile.png'});
+  if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1))throw Error('Form document overflow');
+  await save(200);
+  await page.locator('#action-dialog').waitFor({state:'hidden'});
+  await page.locator('.quality-result-head').filter({hasText:'80'}).waitFor();
+  await page.setViewportSize({width:1440,height:1000});
+  await page.getByRole('button',{name:'更新入选评估',exact:true}).click();
+  await field('outcome').selectOption('hold');
+  await field('evidence.reason_code').selectOption('quality_below_threshold');
+  for(const name of ['rationale','evidence.scope','evidence.maintenance'])await field(name).fill('SYNTHETIC: incomplete evidence; hold for quality reassessment.');
+  await field('evidence.sources').fill('fixture:hold');
+  await save(200);
+  await page.locator('#action-dialog').waitFor({state:'hidden'});
+  if(errors.length)throw Error(errors.join('\n'));
+}

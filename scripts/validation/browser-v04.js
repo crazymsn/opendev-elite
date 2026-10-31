@@ -1,0 +1,72 @@
+async page => {
+ const results=[]; const check=(condition,name)=>{if(!condition)throw new Error(name);results.push(name);};
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('http://127.0.0.1:8874/');
+ await page.locator('#login-view').waitFor({state:'visible'});
+ for(const width of [375,768,1024,1440]){
+  await page.setViewportSize({width,height:1000});
+  check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'landing width '+width);
+  await page.screenshot({path:'output/playwright/v04-landing-'+width+'.png',fullPage:width===375});
+ }
+ await page.getByRole('button',{name:'待跟进',exact:true}).click();
+ check(await page.locator('.preview-ticket').count()===1,'ticket filter');
+ check((await page.locator('#preview-detail').innerText()).includes('Patch Studio'),'ticket detail');
+ await page.getByRole('button',{name:'全部 3',exact:true}).click();
+ await page.getByRole('button',{name:'Agent 怎么体验？',exact:true}).click();
+ check((await page.locator('#assistant-messages').innerText()).includes('续租'),'assistant guided response');
+ await page.locator('#assistant-question').fill('<img src=x onerror=alert(1)>');
+ await page.locator('#assistant-form button').click();
+ check(await page.locator('#assistant-messages img').count()===0,'assistant user text escaped');
+ await page.locator('[data-plan="Credits 支持"]').click();
+ check((await page.locator('#plan-selection').innerText()).includes('未提交申请'),'plan selection explicit');
+ await page.locator('.faq-list summary').first().click();
+ check(await page.locator('.faq-list details').first().getAttribute('open')!==null,'FAQ keyboard native semantics');
+ await page.locator('#support-plans').scrollIntoViewIfNeeded();
+ await page.screenshot({path:'output/playwright/v04-plans.png'});
+ await page.locator('#access-token').fill('incorrect-synthetic-credential');
+ await page.locator('#login-form button').click();
+ await page.locator('#login-error').filter({hasText:'访问凭证无效'}).waitFor();
+ check(true,'invalid login error feedback');
+ await page.locator('#access-token').fill('synthetic-browser-test-only-admin-v04-00000000');
+ await page.locator('#login-form button').click();
+ await page.locator('#workspace').waitFor({state:'visible'});
+ await page.locator('#main .stats').waitFor();
+ check(await page.locator('#access-token').inputValue()==='','credential cleared after login');
+ check(await page.evaluate(()=>localStorage.length===0&&sessionStorage.length===0),'no persistent browser credentials');
+ check((await page.locator('#main').innerText()).includes('演示工作空间'),'explicit synthetic banner');
+ await page.screenshot({path:'output/playwright/v04-workspace-desktop.png'});
+ await page.locator('a.todo[href="#inbox/pending_experiences"]').click();
+ await page.locator('.inbox-item').first().waitFor();
+ check((await page.locator('.inbox-tabs [aria-current=page]').innerText()).includes('待真实体验'),'actionable inbox navigation');
+ const href=await page.locator('.inbox-item a').first().getAttribute('href');
+ await page.locator('.inbox-item a').first().click();
+ await page.locator('tbody tr').waitFor();
+ check(await page.locator('tbody tr').count()===1 && page.url().endsWith(href),'exact record deep link');
+ await page.getByRole('button',{name:'记录体验',exact:true}).click();
+ await page.locator('#action-dialog').waitFor({state:'visible'});
+ await page.locator('[name="result.success"]').selectOption('true');
+ check(await page.locator('[name="result.failure_kind"]').inputValue()==='none','success updates failure kind');
+ check(await page.locator('[name="result.failure_kind"]').isDisabled(),'success locks none failure kind');
+ await page.locator('[name="result.success"]').selectOption('false');
+ check(!(await page.locator('[name="result.failure_kind"]').isDisabled()),'failure kind reenabled');
+ await page.locator('#dialog-cancel').click();
+ await page.goto('http://127.0.0.1:8874/#contacts');
+ await page.getByRole('button',{name:'更新记录',exact:true}).first().click();
+ await page.locator('#action-dialog').waitFor({state:'visible'});
+ check(await page.locator('[name="status"] option').count()>0,'contact status choices no ReferenceError');
+ await page.locator('#dialog-cancel').click();
+ await page.goto('http://127.0.0.1:8874/#projects/101/contacts');
+ await page.goto('http://127.0.0.1:8874/#overview');
+ await page.locator('#main .stats').waitFor();
+ for(const width of [375,768,1024,1440]){
+  await page.setViewportSize({width,height:1000});
+  check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'workspace width '+width);
+  await page.screenshot({path:'output/playwright/v04-workspace-'+width+'.png',fullPage:width===375});
+ }
+ await page.locator('#logout').click();
+ await page.locator('#login-view').waitFor({state:'visible'});
+ check(await page.locator('#main').innerText()==='','logout clears workspace');
+ check(!(await page.locator('#action-dialog').isVisible()),'logout closes dialog');
+ check(errors.length===0,'no uncaught JavaScript errors');
+ return {passed:results.length,checks:results,errors};
+}

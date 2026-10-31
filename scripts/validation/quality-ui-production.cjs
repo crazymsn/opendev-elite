@@ -1,0 +1,33 @@
+async page => {
+  await page.goto('http://127.0.0.1:8765/#team-login');
+  await page.locator('#account-submit:not(:disabled)').waitFor();
+  await page.locator('#login-view [data-language-select]').selectOption('zh-CN');
+  await page.waitForFunction(()=>document.documentElement.lang==='zh-CN');
+  await page.locator('#account-username').fill('OpenDev');
+  await page.locator('#account-password').fill('123456');
+  await page.locator('#account-submit').click();
+  await page.locator('#workspace').waitFor();
+  await page.setViewportSize({width:1440,height:1000});
+  await page.goto('http://127.0.0.1:8765/#criteria');
+  await page.locator('.rubric-row').last().waitFor();
+  if(await page.locator('.rubric-row').count()!==5)throw Error('Wrong installed rubric');
+  if(!(await page.locator('.quality-threshold').innerText()).includes('80'))throw Error('Wrong installed threshold');
+  if(!(await page.locator('#main').innerText()).includes('sop-2026-09-v3'))throw Error('Wrong installed policy');
+  await page.screenshot({path:'output/playwright/v080-production-criteria-zh.png'});
+  await page.goto('http://127.0.0.1:8765/#overview');
+  await page.locator('.stats').waitFor();
+  await page.screenshot({path:'output/playwright/v080-production-overview-zh.png'});
+  await page.locator('#workspace [data-language-select]').selectOption('en');
+  await page.waitForFunction(()=>document.documentElement.lang==='en');
+  await page.goto('http://127.0.0.1:8765/#criteria');
+  await page.locator('.rubric-row').last().waitFor();
+  await page.screenshot({path:'output/playwright/v080-production-criteria-en.png'});
+  await page.locator('#logout').click();
+  await page.locator('#account-submit').waitFor();
+  await page.locator('#login-view [data-language-select]').selectOption('zh-CN');
+  await page.waitForFunction(()=>document.documentElement.lang==='zh-CN');
+  await page.locator('#account-submit:not(:disabled)').waitFor();
+  await page.goto('http://127.0.0.1:8765/#team-login');
+  await page.locator('#account-submit:not(:disabled)').waitFor();
+  await page.screenshot({path:'output/playwright/v080-production-login-zh.png'});
+}

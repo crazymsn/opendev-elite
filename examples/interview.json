@@ -1,0 +1,12 @@
+{
+  "project_id": 123, "contact_id": "REPLACE_WITH_REPLIED_CONTACT_ID",
+  "profile": ["undetermined"],
+  "notes": {
+    "users": "REPLACE: actual users and usage feedback",
+    "commitment": "REPLACE: maintainer commitment",
+    "roadmap": "REPLACE: upcoming priorities",
+    "credit_need": "REPLACE: actual resource requirement",
+    "milestone": "REPLACE: agreed support goal",
+    "consent": false
+  }
+}

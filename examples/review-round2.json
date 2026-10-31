@@ -1,0 +1,11 @@
+{
+  "project_id": 123, "round": 2, "sha": "REPLACE_WITH_CAPTURED_COMMIT",
+  "decision": "pass", "rationale": "REPLACE: reviewer conclusion",
+  "evidence": {
+    "real_problem": ["REPLACE: task and user context"],
+    "usability": ["REPLACE: actual result and obstacles"],
+    "differentiation": ["REPLACE: comparison with current approach"],
+    "potential": ["REPLACE: evidence and unverified assumptions"],
+    "experience_ids": ["REPLACE_WITH_COMPLETED_EXPERIENCE_ID"]
+  }
+}

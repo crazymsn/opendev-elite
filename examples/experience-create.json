@@ -1,0 +1,11 @@
+{
+  "project_id": 123,
+  "audience": "agent",
+  "spec": {
+    "scenario": "REPLACE: a representative real-world user task",
+    "success_criteria": "REPLACE: observable success condition before execution",
+    "environment": "REPLACE: product version, dependencies and isolated environment",
+    "input": "REPLACE: task input or fixture reference",
+    "budget": {"seconds": 300, "max_model_cost_cents": 100}
+  }
+}

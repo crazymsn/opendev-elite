@@ -1,0 +1,10 @@
+{
+  "reason": "Authenticated GitHub quota verified; resume the shared anonymous rate-limit cohort",
+  "resumed_at": "2026-09-08T03:23:29.341711+00:00",
+  "jobs_resumed": 370,
+  "old_delay_until": 1788840290.2752404,
+  "authenticated_core_limit": 5000,
+  "attempts_reset": false,
+  "errors_cleared": false,
+  "workflow_assessments_written": false
+}

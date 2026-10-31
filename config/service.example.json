@@ -1,0 +1,13 @@
+{
+  "users": [
+    {"actor":"technical-reviewer","roles":["reviewer"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"},
+    {"actor":"relationship-operator","roles":["operator"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"},
+    {"actor":"funding-approver","roles":["approver"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"},
+    {"actor":"credits-operator","roles":["disburser"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"},
+    {"actor":"experience-agent","roles":["agent"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"},
+    {"actor":"quality-auditor","roles":["auditor"],"token_sha256":"REPLACE_WITH_AUTH_KEY_DIGEST"}
+  ],
+  "allow_credit_writes": false,
+  "agent_lease_seconds": 900,
+  "discovery": {"lookback_days":7,"queries":[{"category":"agent-infra","query":"topic:ai-agents"}]}
+}

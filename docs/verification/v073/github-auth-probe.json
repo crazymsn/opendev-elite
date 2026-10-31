@@ -1,0 +1,12 @@
+{
+  "source": "github-cli",
+  "checked_at": "2026-09-08T03:22:49.807672+00:00",
+  "core": {
+    "limit": 5000,
+    "remaining": 5000,
+    "reset": 1788841371
+  },
+  "credentials_written": false,
+  "production_database_used": false,
+  "installed_version": "0.7.3"
+}

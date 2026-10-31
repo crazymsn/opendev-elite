@@ -1,0 +1,12 @@
+{
+  "project_id": 123, "interview_id": 1, "outcome": "approve",
+  "rationale": "REPLACE: funding decision based on three rounds",
+  "terms": {
+    "amount": 1000, "unit": "cents", "account": "author@example.invalid",
+    "event_slug": "developer-sponsorship",
+    "identity_evidence": "REPLACE: receiving email confirmed by the interviewed maintainer",
+    "purpose": "REPLACE: sponsored work and agreed milestone",
+    "expires_at": "2026-12-31",
+    "review_dates": ["2026-10-01", "2026-11-01"]
+  }
+}

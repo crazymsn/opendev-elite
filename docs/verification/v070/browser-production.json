@@ -1,0 +1,40 @@
+{
+  "facts": {
+    "version": "0.7.0",
+    "policy": "sop-2026-09-v2",
+    "demo": false,
+    "projects": 145,
+    "first_project": 1344343085,
+    "developers_and_organizations": 222,
+    "unassigned": 145
+  },
+  "checks": [
+    "installed version and policy",
+    "original projects and collected GitHub accounts preserved",
+    "zh-CN selection criteria retained",
+    "zh-CN real directory first page",
+    "zh-CN real directory width 375",
+    "zh-CN real directory width 768",
+    "zh-CN real directory width 1024",
+    "zh-CN real directory width 1440",
+    "zh-CN source-backed real relationships",
+    "zh-CN early inbox connected",
+    "zh-CN owner assignment entry available",
+    "zh-CN current evidence fields retained",
+    "en selection criteria retained",
+    "en real directory first page",
+    "en real directory width 375",
+    "en real directory width 768",
+    "en real directory width 1024",
+    "en real directory width 1440",
+    "en source-backed real relationships",
+    "en early inbox connected",
+    "en owner assignment entry available",
+    "en current evidence fields retained",
+    "no production business writes",
+    "no uncaught JavaScript errors"
+  ],
+  "errors": [],
+  "business_mutations": false,
+  "test_session_logged_out": true
+}

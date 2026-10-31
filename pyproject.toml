@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "github-sponsorship-worker"
+version = "0.8.0"
+description = "OpenDev Elite — evidence-based GitHub developer sponsorship workflow"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+oidc = ["PyJWT[crypto]>=2.13.0,<3"]
+
+[project.scripts]
+sponsorship-worker = "worker.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["worker*", "src.py*"]
+
+[tool.setuptools.package-data]
+worker = ["resources/*.json", "web/*.html", "web/*.js", "web/*.css"]

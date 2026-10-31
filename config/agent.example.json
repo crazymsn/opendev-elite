@@ -1,0 +1,7 @@
+{
+  "image": "your-approved-agent-runner@sha256:REPLACE_WITH_REVIEWED_IMAGE_DIGEST",
+  "command": ["/app/runner", "--input", "/input/task.json", "--output", "/output/result.json"],
+  "timeout_seconds": 300,
+  "memory_mb": 1024,
+  "cpus": 1
+}

@@ -1,0 +1,32 @@
+{
+  "version": "0.6-development",
+  "checks": [
+    "public registration and admin setup removed from DOM",
+    "login responsive 375",
+    "login responsive 768",
+    "login responsive 1024",
+    "login responsive 1440",
+    "password visibility toggle",
+    "failed password cleared",
+    "password masked after submission",
+    "default administrator login",
+    "synthetic environment confirmed before member mutation",
+    "member creation responsive 375",
+    "member creation responsive 768",
+    "member creation responsive 1024",
+    "member creation responsive 1440",
+    "member password confirmation",
+    "member role required",
+    "member display name escaped",
+    "creation form closes after success",
+    "cancel clears initial password",
+    "member cannot manage accounts",
+    "no password in web storage",
+    "member changes password and signs in again",
+    "member update accepted",
+    "disabled member session revoked",
+    "no uncaught browser errors"
+  ],
+  "errors": [],
+  "synthetic_only": true
+}

@@ -1,0 +1,42 @@
+{
+  "facts": {
+    "version": "0.7.2",
+    "demo": false,
+    "assessments": 0
+  },
+  "checks": [
+    "installed production version",
+    "no generated qualifications",
+    "zh-CN real snapshot 1271429585",
+    "zh-CN real source preview 1271429585",
+    "zh-CN evidence boundary 1271429585",
+    "zh-CN real snapshot 1352750887",
+    "zh-CN real source preview 1352750887",
+    "zh-CN evidence boundary 1352750887",
+    "zh-CN real snapshot 1309918135",
+    "zh-CN real source preview 1309918135",
+    "zh-CN evidence boundary 1309918135",
+    "zh-CN real evidence width 375",
+    "zh-CN real evidence width 768",
+    "zh-CN real evidence width 1024",
+    "zh-CN real evidence width 1440",
+    "en real snapshot 1271429585",
+    "en real source preview 1271429585",
+    "en evidence boundary 1271429585",
+    "en real snapshot 1352750887",
+    "en real source preview 1352750887",
+    "en evidence boundary 1352750887",
+    "en real snapshot 1309918135",
+    "en real source preview 1309918135",
+    "en evidence boundary 1309918135",
+    "en real evidence width 375",
+    "en real evidence width 768",
+    "en real evidence width 1024",
+    "en real evidence width 1440",
+    "no production workflow writes",
+    "no uncaught JavaScript errors"
+  ],
+  "errors": [],
+  "business_mutations": false,
+  "test_session_logged_out": true
+}
